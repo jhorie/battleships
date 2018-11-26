@@ -1,4 +1,13 @@
-var createError = require('http-errors');
+var express = require("express");
+var http = require("http");
+
+var port = process.argv[2];
+var app = express();
+
+app.use(express.static(__dirname + "/public"));
+http.createServer(app).listen(port);
+
+/*var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -39,3 +48,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+*/
