@@ -4,6 +4,9 @@ var coordinateModule = (function (x, y) {
     let yCoordinate = y;
 
     return {
+        equals: function (other) {
+            return other.getX() == xCoordinate && other.getY() == yCoordinate;
+        },
         getX: function() {
             return xCoordinate;
         },
@@ -15,11 +18,27 @@ var coordinateModule = (function (x, y) {
         },
         setY: function(y) {
             yCoordinate = y;
-        }
+        },
+        addDirection: function (direction) {
+            switch (direction) {
+                case Direction.East:
+                    xCoordinate++;
+                    break;
+                case Direction.North:
+                    yCoordinate--;
+                    break;
+                case Direction.West:
+                    xCoordinate--;
+                    break;
+                case Direction.South:
+                    yCoordinate++;
+                    break;
+            }
+        },
     }
 });
 
-var newCoordinate = new coordinateModule(3, 1);
-console.log(newCoordinate.getX());
-newCoordinate.setX(25);
-console.log(newCoordinate.getX());
+// var newCoordinate = new coordinateModule(3, 1);
+// console.log(newCoordinate.getX());
+// newCoordinate.setX(25);
+// console.log(newCoordinate.getX());

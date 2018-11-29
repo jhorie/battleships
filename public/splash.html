@@ -9,25 +9,19 @@
     <h1>BASIC BATTLESHIPS</h1>
 </header>
 <main>
-    <img src="images/warshipsplash.png" alt="warshipsplash.png" width ="50%" height="50%">
-    <form formaction="game.html" method="get">
+    <img src="images/warshipsplash.png" alt="warshipsplash.png" width="50%" height="50%">
+
+    <form action="game.html" method="get">
         <label for="name">Name:</label>
         <input type="text" name="name" id="name" required>
-        <input type="submit" value="Save name">
+        <input type="submit" name="random" value="PLAY with random player">
+        <input type="submit" name="friend" value="PLAY with friend">
     </form>
-    <a href="game.html" target="_self">
-        <form action="game.html">
-            <button type="button">PLAY with random player</button>
-        </form>
-    </a>
-    <form action="game.html">
-        <button type="button">Statistics</button>
-    </form>
-    <a href="game.html" target="_self">
-        <form action="game.html">
-            <button type="button">PLAY with friend</button>
-        </form>
-    </a>
+
+
+    <button type="button">Statistics</button>
+
+
 </main>
 </body>
 </html>
