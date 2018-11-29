@@ -3,6 +3,7 @@ var shipModule = (function (length, coordinate, direction) {
     let coordinateShip = coordinate;
     let directionShip = direction;
     let isPartOfShipBombed = []; //// [0] -> coordinateShip
+    let divElement;
 
     for (let i = 0; i < lengthShip; i++) {
         isPartOfShipBombed.push(false)
@@ -36,3 +37,23 @@ var shipModule = (function (length, coordinate, direction) {
     }
 });
 
+function initShips() {
+
+    let catalogue = document.getElementById("catalogue");
+
+
+    catalogue.innerHTML += getShipHTML(2, 1);
+    catalogue.innerHTML += getShipHTML(3, 2);
+    catalogue.innerHTML += getShipHTML(3, 3);
+    catalogue.innerHTML += getShipHTML(4, 4);
+    catalogue.innerHTML += getShipHTML(5, 5);
+
+
+    console.log("One ship added");
+}
+
+function getShipHTML(shipLength, id) {
+    return "<div class=\"ship-" + shipLength + "\" id='ship-" + id + "'>" +
+        "<img src=\"images/plain-triangle.png\" class=\"img-ship\">" +
+        "</div>"
+}

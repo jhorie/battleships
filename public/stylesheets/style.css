@@ -1,8 +1,77 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
 }
 
 a {
-  color: #00B7FF;
+    color: #00B7FF;
+}
+
+#main {
+    width: 100%;
+    height: 100%;
+}
+
+.ship-2 {
+    position: absolute;
+    width: 2%;
+    height: 4%;
+}
+
+.ship-3 {
+    position: absolute;
+    width: 2%;
+    height: 6%;
+}
+
+.ship-4 {
+    position: absolute;
+    width: 2%;
+    height: 8%;
+}
+
+.ship-5 {
+    position: absolute;
+    width: 2%;
+    height: 10%;
+}
+
+#ship-1 {
+    left: 3%;
+    top: 80%;
+}
+
+#ship-2 {
+    left: 6%;
+    top: 80%;
+}
+
+#ship-3 {
+    left: 9%;
+    top: 80%;
+}
+
+#ship-4 {
+    left: 12%;
+    top: 80%;
+}
+
+#ship-5 {
+    left: 15%;
+    top: 80%;
+}
+
+.img-ship {
+    object-fit: fill;
+    width: 100%;
+    height: 100%;
+}
+
+.title-text {
+    font-size: 30px;
+}
+
+.title-text-friendly {
+    float: left;
 }

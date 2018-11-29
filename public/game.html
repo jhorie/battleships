@@ -5,20 +5,23 @@
     <script src="javascripts/Direction.js" type="text/javascript"></script>
     <script src="javascripts/Coordinate.js" type="text/javascript"></script>
     <script src="javascripts/Ship.js" type="text/javascript"></script>
+    <script src="javascripts/GameState.js" type="text/javascript"></script>
+    <script src="javascripts/GameBoard.js" type="text/javascript"></script>
 
+    <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
     <title>Basic Battleships</title>
 </head>
-<body id="body">
+<body onload="initShips(); initTables()" id="body">
 
 <div id="main">
     <div id="header">
-        <div id="title-friendly-fleet">
+        <div id="title-friendly-fleet" class="title-text">
             <span>Friendly Fleet</span>
         </div>
         <div id="title-vs">
             <span>VS</span>
         </div>
-        <div id="title-enemy-fleet">
+        <div id="title-enemy-fleet" class="title-text">
             <span>Enemy's Fleet</span>
         </div>
     </div>
@@ -48,13 +51,13 @@
         <div id="enemy-field">
             <div id="enemy-fleet">
 
-
             </div>
         </div>
     </div>
+    <div id="catalogue">
+    </div>
+
 </div>
-<img src="images/plain-triangle.svg" style="width: 100px; height: 150px;">
-<script src="javascripts/GameState.js" type="text/javascript"></script>
-<script src="javascripts/GameBoard.js" type="text/javascript"></script>
+
 </body>
 </html>
