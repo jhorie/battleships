@@ -1,9 +1,9 @@
 var gameStateModule = (function () {
     return 1;
 });
-let body = document.getElementById("body");
 
-body.onload = function table(){
+
+function initTables(){
     let friendlyFleet = document.getElementById("friendly-fleet");
     let enemyFleet = document.getElementById("enemy-fleet");
     var Table = "<table>"  
@@ -18,9 +18,6 @@ body.onload = function table(){
     friendlyFleet.innerHTML = Table;
     enemyFleet.innerHTML = Table;
 }
-
-let body2 = document.getElementById("body");
-
 
 
 
