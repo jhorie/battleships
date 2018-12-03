@@ -26,10 +26,12 @@ var gameBoardModule = (function () {
             coordinateOnScreen.subtractCoordinate(coordinateFriendlyFleet);
             console.log(coordinateFriendlyFleet.getX());
             console.log(coordinateFriendlyFleet.getY());
-            // let x = Math.floor(coordinateOnScreen.getX() / 40);
-            // let y = Math.floor(coordinateOnScreen.getY() / 40);
-            console.log("x: " + event.target.getAttribute("xdata"));
-            console.log("y: " + event.target.getAttribute("ydata"));
+            let x = Math.floor(coordinateOnScreen.getX() / 40);
+            let y = Math.floor(coordinateOnScreen.getY() / 40);
+            return new coordinateModule(x, y);
+        },
+        originOnScreen: function () {
+            return new coordinateModule(friendlyFleet.getBoundingClientRect().left, friendlyFleet.getBoundingClientRect().top);
         },
     };
 });
@@ -54,9 +56,9 @@ function clearCoor() {
     //document.getElementById("friendly-fleet").innerHTML = "";
 }
 
-
+var gameBoard;
 function initGameBoard() {
     gameBoard = new gameBoardModule();
-    gameBoard.getCoordinateOnScreen(new coordinateModule(1, 1));
+
 }
 

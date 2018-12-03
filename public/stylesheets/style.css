@@ -38,31 +38,6 @@ a {
     height: 200px;
 }
 
-#ship-1 {
-    left: 0px;
-    top: 0px;
-}
-
-#ship-2 {
-    left: 6%;
-    top: 80%;
-}
-
-#ship-3 {
-    left: 9%;
-    top: 80%;
-}
-
-#ship-4 {
-    left: 12%;
-    top: 80%;
-}
-
-#ship-5 {
-    left: 15%;
-    top: 80%;
-}
-
 .img-ship {
     object-fit: fill;
     width: 100%;
@@ -129,15 +104,21 @@ table {
     border-collapse: collapse;
 }
 
- td {
+td {
     border: 1px solid black;
     border-collapse: collapse;
     width: 10%;
-     height: 10%;
+    height: 10%;
     /*height: 100%;*/
 }
 
+#rotate-1 {
+    left: 0%;
+    top: 0%;
+    position: absolute;
+}
+
 /*.fleetCell {*/
-    /*width: 2%;*/
-    /*height: 2%;*/
+/*width: 2%;*/
+/*height: 2%;*/
 /*}*/
