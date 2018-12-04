@@ -12,7 +12,7 @@
 
     <title>Basic Battleships</title>
 </head>
-<body onload="initShips(); initTables()" id="body">
+<body onload="initShips(); initGameBoard()" id="body">
 
 <div id="main">
     <div id="header">
@@ -29,7 +29,10 @@
     </div>
     <div id="game">
         <div id="friendly-field">
-            <div id="friendly-fleet" style="width:100px;height:100px;border:1px solid" onmousedown="printcoor(event)" onmouseout="clearCoor()">
+
+            <div id="friendly-fleet" style="border:1px solid" onclick="printcoor(event)" onmouseout="clearCoor()">
+            </div>
+            <div id="coor">
             </div>
             </div>
             <div id="friendly-catalogue">
@@ -57,6 +60,7 @@
         </div>
     </div>
     <div id="catalogue">
+        <button id="rotate-1" onclick="ship1.rotate()">rotate1</button>
     </div>
 
 </div>

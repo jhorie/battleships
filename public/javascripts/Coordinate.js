@@ -35,6 +35,10 @@ var coordinateModule = (function (x, y) {
                     break;
             }
         },
+        subtractCoordinate: function (otherCoordinate) {
+            xCoordinate -= otherCoordinate.getX();
+            yCoordinate -= otherCoordinate.getY();
+        }
     }
 });
 
