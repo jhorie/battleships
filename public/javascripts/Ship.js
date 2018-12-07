@@ -20,15 +20,13 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
 
     function onmouseup() {
         if (movingState && wasMoving) {
-            movingState = false;
             console.log("onmouse up");
             coordinateShip = gameBoard.getCoordinateFleet(new coordinateModule(divElement.getBoundingClientRect().left, divElement.getBoundingClientRect().top));
-            if (!allShipCoordinatesAreInField(coordinateShip)) {
-                coordinateShip = null;
-            }
+
 
             drawShip();
         }
+        movingState = false;
     }
 
     divElement.onclick = function () {
@@ -41,6 +39,11 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
 
     function allShipCoordinatesAreInField(newCoordinate) {
         let movingCoordinate = new coordinateModule(newCoordinate.getX(), newCoordinate.getY());
+
+        if (!gameBoard.isFieldCoordinateValid(movingCoordinate)) {
+            return false;
+        }
+
         for (let i = 1; i < lengthShip; i++) {
             movingCoordinate.addDirection(directionShip);
             if (!gameBoard.isFieldCoordinateValid(movingCoordinate)) {
@@ -50,7 +53,7 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
         return true;
     }
 
-    function drawShip(rotating = false) {
+    function drawShip() {
         firstFor:
             for (let i = 0; i < ships.length; i++) {
                 if (ships[i].getId() == idShip) {
@@ -73,13 +76,14 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
                     }
                 }
             }
-
+        if (!allShipCoordinatesAreInField(coordinateShip)) {
+            coordinateShip = null;
+            directionShip = Direction.South;
+        }
 
         if (coordinateShip != null) {
-            if (rotating === false) {
-                divElement.style.left = coordinateShip.getX() * 40 + gameBoard.originOnScreen().getX() + 'px';
-                divElement.style.top = coordinateShip.getY() * 40 + gameBoard.originOnScreen().getY() + 'px';
-            }
+            divElement.style.left = coordinateShip.getX() * 40 + gameBoard.originOnScreen().getX() + 'px';
+            divElement.style.top = coordinateShip.getY() * 40 + gameBoard.originOnScreen().getY() + 'px';
         } else {
             divElement.style.left = leftStart + "%";
             divElement.style.top = topStart + "%"
@@ -128,8 +132,10 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
     }
 
     function rotate() {
-        directionShip = (directionShip + 1) % 4;
-        drawShip(true);
+        if (coordinateShip != null) {
+            directionShip = (directionShip + 1) % 2;
+            drawShip();
+        }
     }
 
     return {

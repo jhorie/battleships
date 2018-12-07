@@ -24,12 +24,6 @@ var coordinateModule = (function (x, y) {
                 case Direction.East:
                     xCoordinate++;
                     break;
-                case Direction.North:
-                    yCoordinate--;
-                    break;
-                case Direction.West:
-                    xCoordinate--;
-                    break;
                 case Direction.South:
                     yCoordinate++;
                     break;

@@ -1,1 +1,1 @@
-const Direction = {"East": 1, "North": 2, "West": 3, "South": 0};
+const Direction = {"East": 1, "South": 0};
