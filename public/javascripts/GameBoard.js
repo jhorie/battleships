@@ -20,12 +20,12 @@ var gameBoardModule = (function () {
 
     divElement.onmousedown = function (event) {
         for (let i = 0; i < ships.length; i++) {
-            let shipbounding = ships[i].getDivElement().getBoundingClientRect();
+            let shipsbounding = ships[i].getDivElement().getBoundingClientRect();
             if(shipsbounding.left >= event.x && (shipsbounding.width + shipswounding.left) <= event.x && shipsbounding.top <= event.y && (shipsbounding.top + shipsbounding.height) >= event.y){
-                movingState = true;
-                movingX = event.x;
+                ships[i].movingState = true;
+                ships[i].movingX = event.x;
                 console.log("this is x in Ships:" + event.x);
-                movingY = event.y;
+                ships[i].movingY = event.y;
                 console.log("this is y in Ships:" + event.y);
             }
         }

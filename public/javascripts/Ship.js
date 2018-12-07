@@ -14,8 +14,8 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
     let divElement = document.createElement("div");
     divElement.className = "ship-" + length;
     divElement.id = "ship-" + id;
-    divElement.style.top = 0 + "%";
-    divElement.style.left = 0 + "%";
+    divElement.style.top = 70 + "%";
+    divElement.style.left = startLeft + "%";
     divElement.onmousedown = function (event) {
         movingState = true;
         movingX = event.x;
@@ -178,9 +178,7 @@ divElement.style.transformOrigin = "20px 20px";
         getId: function () {
             return idShip;
         },
-        getMovingState: function(){
-            return movingState;
-        },
+        movingState: movingState,   
         movingX: movingX,
         movingY: movingY,
     }
