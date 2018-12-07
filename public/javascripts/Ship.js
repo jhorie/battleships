@@ -14,12 +14,14 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
     let divElement = document.createElement("div");
     divElement.className = "ship-" + length;
     divElement.id = "ship-" + id;
-    divElement.style.top = topStart + "%";
-    divElement.style.left = startLeft + "%";
+    divElement.style.top = 0 + "%";
+    divElement.style.left = 0 + "%";
     divElement.onmousedown = function (event) {
         movingState = true;
         movingX = event.x;
+        console.log("this is x in Ships:" + event.x);
         movingY = event.y;
+        console.log("this is y in Ships:" + event.y);
     };
 
 
@@ -54,20 +56,6 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
                     }
                 }
             }
-        }
-    };
-
-
-    //divElement.onmouseup.bind(this);
-    divElement.onmousemove = function (event) {
-        if (movingState) {
-            console.log(divElement.style.left);
-            console.log(divElement.style.top);
-
-            divElement.style.left = (divElement.getBoundingClientRect().left - (movingX - event.x)) + 'px';
-            divElement.style.top = (divElement.getBoundingClientRect().top - (movingY - event.y)) + 'px';
-            movingX = event.x;
-            movingY = event.y;
         }
     };
 
@@ -189,7 +177,12 @@ divElement.style.transformOrigin = "20px 20px";
         },
         getId: function () {
             return idShip;
-        }
+        },
+        getMovingState: function(){
+            return movingState;
+        },
+        movingX: movingX,
+        movingY: movingY,
     }
 });
 
