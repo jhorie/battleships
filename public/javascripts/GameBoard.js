@@ -39,6 +39,7 @@ var gameBoardModule = (function () {
                 ships[i].setMovingState(true);
                 ships[i].movingX = event.x;
                 ships[i].movingY = event.y;
+
             }
         }
     };
