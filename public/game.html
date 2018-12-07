@@ -12,7 +12,7 @@
 
     <title>Basic Battleships</title>
 </head>
-<body onload="initShips(); initGameBoard()" id="body">
+<body onload="initGameBoard(); initShips()" id="body">
 
 <div id="main">
     <div id="header">
@@ -34,35 +34,33 @@
             </div>
             <div id="coor">
             </div>
-            </div>
-            <div id="friendly-catalogue">
-
-            </div>
         </div>
-        <div id="game-stats">
-            <div id="div time-in-war">
-                <span id="key time-in-war">Time in war</span>
-                <span id="value time-in-war"></span>
-            </div>
-            <div id="shots-fired">
-                <span id="key shots-fired">Shots fired</span>
-                <span id="value shots-fired"></span>
-            </div>
-            <div id="opponent-name">
-                <span id="key opponents-name">Opponent</span>
-                <span id="value opponents-name"></span>
-            </div>
-        </div>
-        <div id="enemy-field">
-            <div id="enemy-fleet">
+        <div id="friendly-catalogue">
 
-            </div>
         </div>
     </div>
+    <div id="game-stats">
+        <div id="div time-in-war">
+            <span id="key time-in-war">Time in war</span>
+            <span id="value time-in-war"></span>
+        </div>
+        <div id="shots-fired">
+            <span id="key shots-fired">Shots fired</span>
+            <span id="value shots-fired"></span>
+        </div>
+        <div id="opponent-name">
+            <span id="key opponents-name">Opponent</span>
+            <span id="value opponents-name"></span>
+        </div>
+    </div>
+    <div id="enemy-field">
+        <div id="enemy-fleet">
+
+        </div>
+    </div>
+
     <div id="catalogue">
-        <button id="rotate-1" onclick="ship1.rotate()">rotate1</button>
     </div>
-
 </div>
 
 </body>

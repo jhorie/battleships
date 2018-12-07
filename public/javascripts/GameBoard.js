@@ -19,32 +19,35 @@ var gameBoardModule = (function () {
     let divElement = document.getElementById("main");
 
     divElement.onmousedown = function (event) {
+        console.log("Onmousedown in gameboard");
         for (let i = 0; i < ships.length; i++) {
             let shipbounding = ships[i].getDivElement().getBoundingClientRect();
-            if(shipsbounding.left >= event.x && (shipsbounding.width + shipswounding.left) <= event.x && shipsbounding.top <= event.y && (shipsbounding.top + shipsbounding.height) >= event.y){
-                movingState = true;
-                movingX = event.x;
-                console.log("this is x in Ships:" + event.x);
-                movingY = event.y;
-                console.log("this is y in Ships:" + event.y);
+            if (shipbounding.left <= event.x && (shipbounding.width + shipbounding.left) >= event.x && shipbounding.top <= event.y && (shipbounding.top + shipbounding.height) >= event.y) {
+                ships[i].setMovingState(true);
+                ships[i].movingX = event.x;
+                ships[i].movingY = event.y;
             }
         }
     };
 
     divElement.onmousemove = function (event) {
         for (let i = 0; i < ships.length; i++) {
-            if (ships[i].getMovingState()){
+            if (ships[i].getMovingState()) {
+                ships[i].setWasMovingState(true);
                 ships[i].getDivElement().style.left = (ships[i].getDivElement().getBoundingClientRect().left - (ships[i].movingX - event.x)) + 'px';
                 ships[i].getDivElement().style.top = (ships[i].getDivElement().getBoundingClientRect().top - (ships[i].movingY - event.y)) + 'px';
-                console.log("this is x in gameBoard:" + event.x);
-                console.log("this is y in gameBoard:" + event.y);
                 ships[i].movingX = event.x;
                 ships[i].movingY = event.y;
             }
         }
-    }
+    };
 
-    
+    divElement.onmouseup = function (event) {
+        console.log("On mouse up in gameboard");
+        for (let i = 0; i < ships.length; i++) {
+            ships[i].onmouseup();
+        }
+    };
 
 
     return {
@@ -56,14 +59,20 @@ var gameBoardModule = (function () {
 
             let coordinateFriendlyFleet = new coordinateModule(friendlyFleet.getBoundingClientRect().left, friendlyFleet.getBoundingClientRect().top);
             coordinateOnScreen.subtractCoordinate(coordinateFriendlyFleet);
-            console.log(coordinateFriendlyFleet.getX());
-            console.log(coordinateFriendlyFleet.getY());
             let x = Math.floor(coordinateOnScreen.getX() / 40);
             let y = Math.floor(coordinateOnScreen.getY() / 40);
             return new coordinateModule(x, y);
         },
         originOnScreen: function () {
             return new coordinateModule(friendlyFleet.getBoundingClientRect().left, friendlyFleet.getBoundingClientRect().top);
+        },
+        isFieldCoordinateValid: function (fieldCoordinate) {
+            if (fieldCoordinate.getX() >= 0 && fieldCoordinate.getX() <= 9 &&
+                fieldCoordinate.getY() >= 0 && fieldCoordinate.getY() <= 9) {
+                return true;
+            }
+
+            return false;
         },
     };
 });
@@ -89,6 +98,7 @@ function clearCoor() {
 }
 
 var gameBoard;
+
 function initGameBoard() {
     gameBoard = new gameBoardModule();
 
