@@ -104,7 +104,22 @@ console.log("new coor: x: " + coordinateShip.getX());
                 ships[i].setWasMovingState(false);
             }
         }
+        checkinField();
     };
+
+    function checkinField(){
+        let shipsinfield = 0;
+        for(let i=0; i<ships.length(); i++){
+            if(ships[i].allShipCoordinatesAreInField){
+                shipsinfield = shipsinfield +1;
+            }
+        }
+        if(shipsinfield == 5){
+            let buttonchange = document.getElementById("ready-button");
+            buttonchange.style.visibility = "visible";
+            }
+        }
+    }
 
     function allShipCoordinatesAreInField(ship, newCoordinate) {
         let movingCoordinate = new coordinateModule(newCoordinate.getX(), newCoordinate.getY());
