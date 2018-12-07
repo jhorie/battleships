@@ -62,7 +62,7 @@ var gameBoardModule = (function () {
                 if (ships[i].getWasMovingState()) {
                     console.log("onmouse up");
                     var coordinateShip = getCoordinateFleet(new coordinateModule(ships[i].getDivElement().getBoundingClientRect().left, ships[i].getDivElement().getBoundingClientRect().top));
-console.log("new coor: x: " + coordinateShip.getX());
+                    ships[i].setCoordinateShip(coordinateShip);
                     ships[i].setWasMovingState(false);
                 } else {
                     ships[i].rotate();
