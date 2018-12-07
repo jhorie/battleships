@@ -8,17 +8,20 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
     let movingY = 0;
     let idShip = id;
     const leftStart = startLeft;
-    const topStart = 80;
+    const topStart = 70;
 
 
     let divElement = document.createElement("div");
     divElement.className = "ship-" + length;
     divElement.id = "ship-" + id;
+    divElement.style.top = topStart + "%";
+    divElement.style.left = startLeft + "%";
     divElement.onmousedown = function (event) {
         movingState = true;
         movingX = event.x;
         movingY = event.y;
     };
+
 
     divElement.onmouseup = function (event) {
         if (movingState) {
