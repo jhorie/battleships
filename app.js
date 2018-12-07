@@ -3,6 +3,7 @@ var http = require("http");
 var websocket = require("ws");
 var Game = require("./public/javascripts/Game");
 var Message = require("./public/javascripts/Message");
+var GameBoard = require("./public/javascripts/GameBoard");
 
 var port = process.argv[2];
 var app = express();
@@ -41,7 +42,10 @@ wss.on("connection", function (ws) {
         let msg = JSON.parse(message);
         if (msg.type === Message.O_IM_READY.type) {
             let gameObj = connections[ws.id];
-            console.log(msg.type);
+
+            let gameBoardA = new GameBoard();
+            gameBoardA.getShips();
+
         }
     });
 

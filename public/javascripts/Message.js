@@ -19,6 +19,6 @@
     exports.O_YOUR_TURN = {type: "Your turn"};
     exports.O_OTHER_TURN = {type: "Opponent turn"};
 
-    exports.O_IM_READY = {type: "IM_READY", coordinatesFleet: null, directions: null};
+    exports.O_IM_READY = {type: "IM_READY", coordinatesFleet: {}, directions: {}, lengths: {}};
 
 })(typeof exports === "undefined" ? this.Message = {} : exports);

@@ -67,7 +67,6 @@ game.prototype.setStatus = function (w) {
                 this.playerB.send(JSON.stringify(Message.O_YOUR_TURN));
                 this.playerA.send(JSON.stringify(Message.O_OTHER_TURN));
                 break;
-
         }
 
     } else {

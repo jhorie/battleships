@@ -1,4 +1,4 @@
-var gameBoardModule = (function () {
+var gameBoardModule = (function (exports) {
 
     let ship1 = new shipModule(2, null, Direction.South, 1, 4);
     let ship2 = new shipModule(3, null, Direction.South, 2, 8);
@@ -107,18 +107,29 @@ var gameBoardModule = (function () {
         checkinField();
     };
 
-    function checkinField(){
+    function checkinField() {
         let shipsinfield = 0;
-        for(let i=0; i<ships.length(); i++){
-            if(ships[i].allShipCoordinatesAreInField){
-                shipsinfield = shipsinfield +1;
+        for (let i = 0; i < ships.length; i++) {
+            if (ships[i].getCoordinateShip() !== null) {
+                shipsinfield = shipsinfield + 1;
             }
         }
-        if(shipsinfield == 5){
+        if (shipsinfield === ships.length) {
             let buttonchange = document.getElementById("ready-button");
             buttonchange.style.visibility = "visible";
-            }
         }
+    }
+
+
+    function onclickPlayerReadyButton() {
+        let msg = Message.O_IM_READY;
+        for (let i = 0; i < ships.length; i++) {
+            console.log(ships[i].getCoordinateShip());
+            msg.coordinatesFleet[i] = {x: ships[i].getCoordinateShip().getX(), y: ships[i].getCoordinateShip().getY()};
+            msg.directions[i] = ships[i].getDirection();
+            msg.lengths[i] = ships[i].getLengthShip();
+        }
+        socket.send(JSON.stringify(msg));
     }
 
     function allShipCoordinatesAreInField(ship, newCoordinate) {
@@ -161,6 +172,10 @@ var gameBoardModule = (function () {
             return new coordinateModule(friendlyFleet.getBoundingClientRect().left, friendlyFleet.getBoundingClientRect().top);
         },
         isFieldCoordinateValid: isFieldCoordinateValid,
+        onclickPlayerReadyButton: onclickPlayerReadyButton,
+        getShips: function () {
+            return ships;
+        },
     };
 });
 
