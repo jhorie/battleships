@@ -136,7 +136,7 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
             return lengthShip;
         }
     }
-});
+})();
 
 
 
