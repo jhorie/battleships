@@ -53,10 +53,18 @@ wss.on("connection", function (ws) {
                 gameObj.playerA.ws.send(JSON.stringify(Message.O_YOUR_TURN));
                 gameObj.playerB.ws.send(JSON.stringify(Message.O_OTHER_TURN));
             }
-        } else if (msg.type === Message.O_FIRE) {
+        } else if (msg.type === Message.O_FIRE.type) {
             let gameObj = connections[ws.id];
-            let gameState = gameObj.fire(msg.O_FIRE.coordinate, ws.id);
+            console.log(msg.coordinate);
+            let gameState = gameObj.fire(msg.coordinate, ws.id);
 
+            if (gameState === "TURN A") {
+                gameObj.playerA.ws.send(JSON.stringify(Message.O_YOUR_TURN));
+                gameObj.playerB.ws.send(JSON.stringify(Message.O_OTHER_TURN));
+            } else if (gameState === "TURN B") {
+                gameObj.playerA.ws.send(JSON.stringify(Message.O_OTHER_TURN));
+                gameObj.playerB.ws.send(JSON.stringify(Message.O_YOUR_TURN));
+            }
         }
     });
 
