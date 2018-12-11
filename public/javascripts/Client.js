@@ -1,5 +1,7 @@
 gameState = "";
 
+var Message = require('./Message');
+
 var socketModule = (function initSocket() {
 
     socket = new WebSocket("ws://localhost:3000");

@@ -65,18 +65,14 @@
 </div>
 <script>
     function onmouseenterTableCell(e) {
-        if (gameState === "Your turn"){
-            if (e.target.id === "enemyTableCell") {
-                e.target.style.backgroundColor = "#00F";
-            }
+        if (e.target.id === "enemyTableCell") {
+            e.target.style.backgroundColor = "#00F";
         }
     }
 
     function onmouseoutTableCell(e) {
-        if (gameState === "Your turn"){
-            if (e.target.id === "enemyTableCell") {
-                e.target.style.backgroundColor = "#FFF";
-            }
+        if (e.target.id === "enemyTableCell") {
+            e.target.style.backgroundColor = "#FFF";
         }
     }
 

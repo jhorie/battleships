@@ -141,8 +141,6 @@ var gameBoard = (function (exports) {
         }
         console.log("dit sturen we: " + JSON.stringify(msg));
         socket.send(JSON.stringify(msg));
-        let buttonchange = document.getElementById("ready-button");
-        buttonchange.style.visibility = "hidden";
     }
 
     function allShipCoordinatesAreInField(ship, newCoordinate) {
