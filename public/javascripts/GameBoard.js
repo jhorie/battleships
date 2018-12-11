@@ -1,4 +1,4 @@
-var gameBoardModule = (function (exports) {
+var gameBoard = (function (exports) {
 
     let ship1 = new shipModule(2, null, Direction.South, 1, 4);
     let ship2 = new shipModule(3, null, Direction.South, 2, 8);
@@ -118,6 +118,10 @@ var gameBoardModule = (function (exports) {
             let buttonchange = document.getElementById("ready-button");
             buttonchange.style.visibility = "visible";
         }
+        else{
+            let buttonchange = document.getElementById("ready-button");
+            buttonchange.style.visibility = "hidden";
+        }
     }
 
 
@@ -177,19 +181,6 @@ var gameBoardModule = (function (exports) {
             return ships;
         },
     };
-});
+})();
 
-function onmouseenterTableCell(e) {
-    e.target.style.backgroundColor = "#00F";
-}
-
-function onmouseoutTableCell(e) {
-    e.target.style.backgroundColor = "#FFF";
-}
-
-var gameBoard;
-
-function initGameBoard() {
-    gameBoard = new gameBoardModule();
-}
 
