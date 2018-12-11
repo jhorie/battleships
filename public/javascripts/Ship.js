@@ -1,7 +1,7 @@
-var shipModule = (function (length, coordinate, direction, id, startLeft) {
+var shipModule = (function (length, coordinate, id, startLeft) {
     let lengthShip = length;
     let coordinateShip = coordinate;
-    let directionShip = direction;
+    let directionShip = directionModule.Direction.South;
     let isPartOfShipBombed = []; //// [0] -> coordinateShip
     let movingState = false;
     let wasMoving = false;
@@ -9,13 +9,14 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
     const leftStart = startLeft;
     const topStart = 70;
 
-
-    let divElement = document.createElement("div");
-    divElement.className = "ship-" + length;
-    divElement.id = "ship-" + id;
-    divElement.style.top = topStart + "%";
-    divElement.style.left = startLeft + "%";
-    divElement.style.transformOrigin = "20px 20px";
+    if (document !== 'undefined') {
+        let divElement = document.createElement("div");
+        divElement.className = "ship-" + length;
+        divElement.id = "ship-" + id;
+        divElement.style.top = topStart + "%";
+        divElement.style.left = startLeft + "%";
+        divElement.style.transformOrigin = "20px 20px";
+    }
 
     function allShipCoordinatesAreInField(newCoordinate) {
         let movingCoordinate = new coordinateModule(newCoordinate.getX(), newCoordinate.getY());
@@ -139,5 +140,4 @@ var shipModule = (function (length, coordinate, direction, id, startLeft) {
 })();
 
 
-
-
+module.exports = shipModule;

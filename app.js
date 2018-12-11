@@ -1,6 +1,10 @@
 var express = require("express");
 var http = require("http");
 var websocket = require("ws");
+
+directionModule = require('./public/javascripts/Direction');
+shipModule = require('./public/javascripts/Ship');
+
 var Game = require("./public/javascripts/Game");
 var Message = require("./public/javascripts/Message");
 var GameBoard = require("./public/javascripts/GameBoard");

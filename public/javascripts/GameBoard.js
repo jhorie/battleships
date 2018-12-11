@@ -1,10 +1,10 @@
 var gameBoard = (function (exports) {
 
-    let ship1 = new shipModule(2, null, Direction.South, 1, 4);
-    let ship2 = new shipModule(3, null, Direction.South, 2, 8);
-    let ship3 = new shipModule(3, null, Direction.South, 3, 12);
-    let ship4 = new shipModule(4, null, Direction.South, 4, 16);
-    let ship5 = new shipModule(5, null, Direction.South, 5, 20);
+    let ship1 = new shipModule(2, null, 1, 4);
+    let ship2 = new shipModule(3, null, 2, 8);
+    let ship3 = new shipModule(3, null, 3, 12);
+    let ship4 = new shipModule(4, null, 4, 16);
+    let ship5 = new shipModule(5, null, 5, 20);
     let ships = [ship1, ship2, ship3, ship4, ship5];
     let catalogue = document.getElementById("catalogue");
     catalogue.appendChild(ship1.getDivElement());
@@ -184,3 +184,4 @@ var gameBoard = (function (exports) {
 })();
 
 
+module.exports = gameBoard;
