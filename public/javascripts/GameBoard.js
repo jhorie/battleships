@@ -1,17 +1,18 @@
 var gameBoard = (function (exports) {
 
     let ship1 = new shipModule(2, null, 1, 4);
-    let ship2 = new shipModule(3, null, 2, 8);
-    let ship3 = new shipModule(3, null, 3, 12);
-    let ship4 = new shipModule(4, null, 4, 16);
-    let ship5 = new shipModule(5, null, 5, 20);
-    let ships = [ship1, ship2, ship3, ship4, ship5];
+    // let ship2 = new shipModule(3, null, 2, 8);
+    // let ship3 = new shipModule(3, null, 3, 12);
+    // let ship4 = new shipModule(4, null, 4, 16);
+    // let ship5 = new shipModule(5, null, 5, 20);
+    let ships = [ship1]; //, ship2, ship3, ship4, ship5];
+    // let ships = [ship1, ship2, ship3, ship4, ship5];
     let catalogue = document.getElementById("catalogue");
     catalogue.appendChild(ship1.getDivElement());
-    catalogue.appendChild(ship2.getDivElement());
-    catalogue.appendChild(ship3.getDivElement());
-    catalogue.appendChild(ship4.getDivElement());
-    catalogue.appendChild(ship5.getDivElement());
+    // catalogue.appendChild(ship2.getDivElement());
+    // catalogue.appendChild(ship3.getDivElement());
+    // catalogue.appendChild(ship4.getDivElement());
+    // catalogue.appendChild(ship5.getDivElement());
 
     let friendlyFleet = document.getElementById("friendly-fleet");
     let enemyFleet = document.getElementById("enemy-fleet");

@@ -77,8 +77,8 @@
     }
 
     function enemyTableCellClicked(e) {
-        if (gameState === "YOUR_TURN") {
-            socketModule.firedCoordinate(e.target.xdata, e.target.ydata);
+        if (gameState === "Your turn") {
+            socketModule.firedCoordinate(e.target.getAttribute('xdata'), e.target.getAttribute('ydata'));
         }
     }
 
