@@ -31,6 +31,7 @@
             </div>
         </div>
         <div id="friendly-catalogue">
+
         </div>
     </div>
     <div id="game-stats">
@@ -63,23 +64,25 @@
     </div>
 </div>
 <script>
-        function onmouseenterTableCell(e) {
-            if(e.id ("enemy-fleet")){
-                e.target.style.backgroundColor = "#00F";
-            }
+    function onmouseenterTableCell(e) {
+        if (e.target.id === "enemyTableCell") {
+            e.target.style.backgroundColor = "#00F";
         }
-        function onmouseoutTableCell(e) {
-            if(document.getElementById("enemy-fleet")){
-                e.target.style.backgroundColor = "#FFF";
-            }
-        }
-        function enemyTableCellClicked(e) {
-            if(gameState === "YOUR_TURN"){
-            socketModule.firedCoordinate(e.target.xdata, e.target.ydata);
-            }
-        }
+    }
 
-    </script>
+    function onmouseoutTableCell(e) {
+        if (e.target.id === "enemyTableCell") {
+            e.target.style.backgroundColor = "#FFF";
+        }
+    }
+
+    function enemyTableCellClicked(e) {
+        if (gameState === "YOUR_TURN") {
+            socketModule.firedCoordinate(e.target.xdata, e.target.ydata);
+        }
+    }
+
+</script>
 <script src="javascripts/Message.js" type="text/javascript"></script>
 <script src="javascripts/Direction.js" type="text/javascript"></script>
 <script src="javascripts/Coordinate.js" type="text/javascript"></script>

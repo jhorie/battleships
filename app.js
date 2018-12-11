@@ -42,8 +42,9 @@ wss.on("connection", function (ws) {
 
         let msg = JSON.parse(message);
         if (msg.type === Message.O_IM_READY.type) {
+            console.log("IM READY MESSAGE received");
             let gameObj = connections[ws.id];
-            let gameState = gameObj.setShips(msg.O_IM_READY.coordinatesFleet, ws.id);
+            let gameState = gameObj.setShips(msg.coordinatesFleet, ws.id);
 
             if (gameState === "PLAYER A READY" || gameState === "PLAYER B READY") {
                 return;

@@ -17,24 +17,28 @@ var gameBoard = (function (exports) {
     let enemyFleet = document.getElementById("enemy-fleet");
 
 
-    var Table = "<table>"
-    for (let y = 0; y < 10; y++) {
-        Table = Table + "<tr class='fleetRow'>";
-        for (let x = 0; x < 10; x++) {
-            Table = Table + "<td class='fleetCell' xdata='" + x + "' ydata='" + y + "' onmouseover='onmouseenterTableCell(event)' onmouseout='onmouseoutTableCell(event)'> <div xdata='" + x + "' ydata='" + y + "' onclick='printcoor(event)'>" + "</div></td>";
+    friendlyFleet.innerHTML = createTable("friendlyTableCell");
+    enemyFleet.innerHTML = createTable("enemyTableCell");
+
+    function createTable(idTableCell) {
+        var Table = "<table>";
+        for (let y = 0; y < 10; y++) {
+            Table = Table + "<tr class='fleetRow'>";
+            for (let x = 0; x < 10; x++) {
+                Table = Table + "<td class='fleetCell' id='" + idTableCell + "' xdata='" + x + "' ydata='" + y + "' onclick='enemyTableCellClicked(event)' onmouseover='onmouseenterTableCell(event)' onmouseout='onmouseoutTableCell(event)'> <div xdata='" + x + "' ydata='" + y + "' onclick='printcoor(event)'>" + "</div></td>";
+            }
+            Table = Table + "</tr>";
         }
-        Table = Table + "</tr>";
+        Table = Table + "</table>";
+        return Table;
     }
-    Table = Table + "</table>"
-    friendlyFleet.innerHTML = Table;
-    enemyFleet.innerHTML = Table;
 
     let divElement = document.getElementById("main");
 
     divElement.onmousedown = function (event) {
         console.log("Onmousedown in gameboard");
         console.log(gameState);
-        if(gameState == Message.O_WAIT_FOR_PLAYER.type ||  gameState == Message.O_WAIT_FOR_NEW_PLAYER.type){
+        if (gameState === Message.O_WAIT_FOR_PLAYER.type || gameState === Message.O_WAIT_FOR_NEW_PLAYER.type) {
             for (let i = 0; i < ships.length; i++) {
                 let shipbounding = ships[i].getDivElement().getBoundingClientRect();
                 if (shipbounding.left <= event.x && (shipbounding.width + shipbounding.left) >= event.x && shipbounding.top <= event.y && (shipbounding.top + shipbounding.height) >= event.y) {
@@ -97,7 +101,7 @@ var gameBoard = (function (exports) {
                 console.log("Lets check if coordinates are valid");
                 if (coordinateShip != null && !allShipCoordinatesAreInField(ships[i], coordinateShip)) {
                     coordinateShip = null;
-                    ships[i].setDirection(Direction.South);
+                    ships[i].setDirection(directionModule().South);
                 }
                 ships[i].setCoordinateShip(coordinateShip);
 
@@ -112,7 +116,7 @@ var gameBoard = (function (exports) {
 
     function checkinField() {
         let shipsinfield = 0;
-        if(gameState === Message.O_WAIT_FOR_PLAYER.type){
+        if (gameState === Message.O_WAIT_FOR_PLAYER.type) {
             for (let i = 0; i < ships.length; i++) {
                 if (ships[i].getCoordinateShip() !== null) {
                     shipsinfield = shipsinfield + 1;
@@ -121,8 +125,7 @@ var gameBoard = (function (exports) {
             if (shipsinfield === ships.length) {
                 let buttonchange = document.getElementById("ready-button");
                 buttonchange.style.visibility = "visible";
-            }
-            else{
+            } else {
                 let buttonchange = document.getElementById("ready-button");
                 buttonchange.style.visibility = "hidden";
             }

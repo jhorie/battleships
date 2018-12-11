@@ -1,4 +1,4 @@
-require("./Message");
+var Message = require("./Message");
 
 var game = function (gameId) {
     this.playerA = {ws: null, ships: null, field: this.createField()};
@@ -73,16 +73,17 @@ game.prototype.setStatus = function (w) {
 
         switch (this.gameState) {
             case "TURN A":
-                this.playerA.send(JSON.stringify(Message.O_YOUR_TURN));
-                this.playerB.send(JSON.stringify(Message.O_OTHER_TURN));
+                this.playerA.ws.send(JSON.stringify(Message.O_YOUR_TURN));
+                this.playerB.ws.send(JSON.stringify(Message.O_OTHER_TURN));
                 break;
             case "TURN B":
-                this.playerB.send(JSON.stringify(Message.O_YOUR_TURN));
-                this.playerA.send(JSON.stringify(Message.O_OTHER_TURN));
+                this.playerB.ws.send(JSON.stringify(Message.O_YOUR_TURN));
+                this.playerA.ws.send(JSON.stringify(Message.O_OTHER_TURN));
                 break;
         }
 
     } else {
+        console.log("ERROR state");
         return new Error("ERROR invalid gamestate");
     }
 };
@@ -118,7 +119,20 @@ game.prototype.setShips = function (coordinates, wsId) {
             this.setStatus("PLAYER B READY");
         }
         return this.gameState;
+    } else if (this.gameState === "PLAYER A READY") {
+        if (wsId === this.playerB.ws.id) {
+            this.playerB.ships = coordinates;
+            this.setStatus("TURN A");
+        }
+        return this.gameState;
+    } else if (this.gameState === "PLAYER B READY") {
+        if (wsId === this.playerA.ws.id) {
+            this.playerA.ships = coordinates;
+            this.setStatus("TURN A");
+        }
+        return this.gameState;
     }
+    return new Error("ERROR");
 };
 
 game.prototype.fire = function (coordinate, wsId) {
