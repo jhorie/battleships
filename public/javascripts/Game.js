@@ -1,8 +1,8 @@
 var Message = require("./Message");
 
 var game = function (gameId) {
-    this.playerA = {ws: null, ships: [], field: this.createField()};
-    this.playerB = {ws: null, ships: [], field: this.createField()};
+    this.playerA = {ws: null, ships: null, field: this.createField()};
+    this.playerB = {ws: null, ships: null, field: this.createField()};
     this.gameState = "0 JOINT";
 };
 
@@ -106,8 +106,6 @@ game.prototype.addPlayer = function (p) {
 };
 
 game.prototype.setShips = function (coordinates, wsId) {
-    console.table(coordinates);
-    console.log(coordinates);
     if (this.gameState !== "2 JOINT" && this.gameState !== "PLAYER A READY" && this.gameState !== "PLAYER B READY") {
         return new Error("ERROR");
     }
@@ -138,70 +136,18 @@ game.prototype.setShips = function (coordinates, wsId) {
 };
 
 game.prototype.fire = function (coordinate, wsId) {
-    if (this.gameState !== "TURN A" && this.gameState !== "TURN B") {
+    if (this.gameState !== "TURN A" || this.gameState !== "TURN B") {
         return new Error("ERROR");
     }
 
     if (this.gameState === "TURN A" && this.playerA.ws.id === wsId) {
-        console.log("x: " + coordinate.x);
-        console.log("y: " + coordinate.y);
         if (fieldCheck(this.playerB.field, coordinate)) {
-            if (fireCheck(this.playerB.ships, coordinate)) {
-                let msg = Message.O_HAVE_HIT;
-                msg.coordinate = coordinate;
-                this.playerA.ws.send(JSON.stringify(msg));
+            if (fireCheck(this.playerB.ships)) {
 
-                msg = Message.O_FIRE;
-                msg.coordinate = coordinate;
-                this.playerB.ws.send(JSON.stringify(msg));
-            } else {
-                let msg = Message.O_HAVE_MISSED;
-                msg.coordinate = coordinate;
-                this.playerA.ws.send(JSON.stringify(msg));
-
-                msg = Message.O_FIRE;
-                msg.coordinate = coordinate;
-                this.playerB.ws.send(JSON.stringify(msg));
             }
-
-            this.setStatus("TURN B");
-            return this.gameState;
-        } else {
-            //// invalid coordinate
-            let msg = Message.O_INVALID_COORDINATE;
-            this.playerA.ws.send(JSON.stringify(msg));
-            return this.gameState;
         }
     } else if (this.gameState === "TURN B" && this.playerB.ws.id === wsId) {
-        console.log("x: " + coordinate.x);
-        console.log("y: " + coordinate.y);
-        if (fieldCheck(this.playerA.field, coordinate)) {
-            if (fireCheck(this.playerA.ships, coordinate)) {
-                let msg = Message.O_HAVE_HIT;
-                msg.coordinate = coordinate;
-                this.playerB.ws.send(JSON.stringify(msg));
 
-                msg = Message.O_FIRE;
-                msg.coordinate = coordinate;
-                this.playerA.ws.send(JSON.stringify(msg));
-            } else {
-                let msg = Message.O_HAVE_MISSED;
-                msg.coordinate = coordinate;
-                this.playerB.ws.send(JSON.stringify(msg));
-
-                msg = Message.O_FIRE;
-                msg.coordinate = coordinate;
-                this.playerA.ws.send(JSON.stringify(msg));
-            }
-
-            this.setStatus("TURN A");
-            return this.gameState;
-        } else {
-            //// invalid coordinate
-            let msg = Message.O_INVALID_COORDINATE;
-            this.playerB.ws.send(JSON.stringify(msg));
-            return this.gameState;
-        }
     }
 
     function fieldCheck(field, fireCoordinate) {
@@ -213,21 +159,15 @@ game.prototype.fire = function (coordinate, wsId) {
     }
 
     function fireCheck(ships, fireCoordinate) {
-        console.log("firecoorx: " + fireCoordinate.x);
-        console.log("firecoory: " + fireCoordinate.y);
         for (let j = 0; j < ships.length; j++) {
             for (let i = 0; i < ships[j].length; i++) {
-                console.log("shipsx: " + ships[j][i].x);
-                console.log("shipsy: " + ships[j][i].y);
-                if (ships[j][i].x == fireCoordinate.x && ships[j][i].y == fireCoordinate.y) {
+                if (ships[j][i].x === fireCoordinate.x && ships[j][i].y === fireCoordinate.y) {
                     ships[j].splice(i, 1);
                     console.log("fireCheck HIT");
                     return true;
                 }
             }
         }
-        console.log("fireCheck MISS");
-        return false;
     }
 };
 
