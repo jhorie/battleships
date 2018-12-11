@@ -33,13 +33,15 @@ var gameBoard = (function (exports) {
 
     divElement.onmousedown = function (event) {
         console.log("Onmousedown in gameboard");
-        for (let i = 0; i < ships.length; i++) {
-            let shipbounding = ships[i].getDivElement().getBoundingClientRect();
-            if (shipbounding.left <= event.x && (shipbounding.width + shipbounding.left) >= event.x && shipbounding.top <= event.y && (shipbounding.top + shipbounding.height) >= event.y) {
-                ships[i].setMovingState(true);
-                ships[i].movingX = event.x;
-                ships[i].movingY = event.y;
+        if(gameState === Message.O_WAIT_FOR_PLAYER.type){
+            for (let i = 0; i < ships.length; i++) {
+                let shipbounding = ships[i].getDivElement().getBoundingClientRect();
+                if (shipbounding.left <= event.x && (shipbounding.width + shipbounding.left) >= event.x && shipbounding.top <= event.y && (shipbounding.top + shipbounding.height) >= event.y) {
+                    ships[i].setMovingState(true);
+                    ships[i].movingX = event.x;
+                    ships[i].movingY = event.y;
 
+                }
             }
         }
     };
@@ -109,18 +111,20 @@ var gameBoard = (function (exports) {
 
     function checkinField() {
         let shipsinfield = 0;
-        for (let i = 0; i < ships.length; i++) {
-            if (ships[i].getCoordinateShip() !== null) {
-                shipsinfield = shipsinfield + 1;
+        if(gameState === Message.O_WAIT_FOR_PLAYER.type){
+            for (let i = 0; i < ships.length; i++) {
+                if (ships[i].getCoordinateShip() !== null) {
+                    shipsinfield = shipsinfield + 1;
+                }
             }
-        }
-        if (shipsinfield === ships.length) {
-            let buttonchange = document.getElementById("ready-button");
-            buttonchange.style.visibility = "visible";
-        }
-        else{
-            let buttonchange = document.getElementById("ready-button");
-            buttonchange.style.visibility = "hidden";
+            if (shipsinfield === ships.length) {
+                let buttonchange = document.getElementById("ready-button");
+                buttonchange.style.visibility = "visible";
+            }
+            else{
+                let buttonchange = document.getElementById("ready-button");
+                buttonchange.style.visibility = "hidden";
+            }
         }
     }
 
