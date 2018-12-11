@@ -1,7 +1,7 @@
-var shipModule = (function (length, coordinate, id, startLeft) {
+shipModule = (function (length, coordinate, id, startLeft) {
     let lengthShip = length;
     let coordinateShip = coordinate;
-    let directionShip = directionModule.Direction.South;
+    let directionShip = directionModule().South;
     let isPartOfShipBombed = []; //// [0] -> coordinateShip
     let movingState = false;
     let wasMoving = false;
@@ -137,7 +137,4 @@ var shipModule = (function (length, coordinate, id, startLeft) {
             return lengthShip;
         }
     }
-})();
-
-
-module.exports = shipModule;
+});
