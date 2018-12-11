@@ -4,7 +4,7 @@ var socketModule = (function initSocket() {
 
     socket = new WebSocket("ws://localhost:3000");
     socket.onmessage = function (event) {
-        gameState = event.data;
+        gameState = JSON.parse(event.data).type;
     };
 
     socket.onopen = function () {

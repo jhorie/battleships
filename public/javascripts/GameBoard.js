@@ -33,7 +33,8 @@ var gameBoard = (function (exports) {
 
     divElement.onmousedown = function (event) {
         console.log("Onmousedown in gameboard");
-        if(gameState === Message.O_WAIT_FOR_PLAYER.type){
+        console.log(gameState);
+        if(gameState == Message.O_WAIT_FOR_PLAYER.type ||  gameState == Message.O_WAIT_FOR_NEW_PLAYER.type){
             for (let i = 0; i < ships.length; i++) {
                 let shipbounding = ships[i].getDivElement().getBoundingClientRect();
                 if (shipbounding.left <= event.x && (shipbounding.width + shipbounding.left) >= event.x && shipbounding.top <= event.y && (shipbounding.top + shipbounding.height) >= event.y) {
