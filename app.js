@@ -1,11 +1,9 @@
 var express = require("express");
 var http = require("http");
 var websocket = require("ws");
-require('./public/javascripts/Direction');
-require('./public/javascripts/Ship');
+
 var Game = require("./public/javascripts/Game");
 var Message = require("./public/javascripts/Message");
-var GameBoard = require("./public/javascripts/GameBoard");
 
 var port = process.argv[2];
 var app = express();
@@ -21,6 +19,7 @@ var game = new Game();
 var connectionId = 0;
 var connections = {};
 
+
 wss.on("connection", function (ws) {
 
     ws.id = connectionId++;
@@ -34,8 +33,8 @@ wss.on("connection", function (ws) {
         ws.send(JSON.stringify(Message.O_WAIT_FOR_NEW_PLAYER));
     } else {
         /// gameState === "2 JOIN";
-        game.playerA.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
-        game.playerB.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
+        game.playerA.ws.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
+        game.playerB.ws.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
     }
 
 
@@ -44,9 +43,18 @@ wss.on("connection", function (ws) {
         let msg = JSON.parse(message);
         if (msg.type === Message.O_IM_READY.type) {
             let gameObj = connections[ws.id];
+            let gameState = gameObj.setShips(msg.O_IM_READY.coordinatesFleet, ws.id);
 
-            let gameBoardA = new GameBoard();
-            gameBoardA.getShips();
+            if (gameState === "PLAYER A READY" || gameState === "PLAYER B READY") {
+                return;
+            }
+            if (gameState === "TURN A") {
+                gameObj.playerA.ws.send(JSON.stringify(Message.O_YOUR_TURN));
+                gameObj.playerB.ws.send(JSON.stringify(Message.O_OTHER_TURN));
+            }
+        } else if (msg.type === Message.O_FIRE) {
+            let gameObj = connections[ws.id];
+            let gameState = gameObj.fire(msg.O_FIRE.coordinate, ws.id);
 
         }
     });
@@ -59,14 +67,14 @@ wss.on("connection", function (ws) {
                 gameObj.setStatus("ABORTED");
 
                 try {
-                    gameObj.playerA.close();
+                    gameObj.playerA.ws.close();
                     gameObj.playerA = null;
                 } catch (e) {
                     console.log("Player A closing: " + e);
                 }
 
                 try {
-                    gameObj.playerB.close();
+                    gameObj.playerB.ws.close();
                     gameObj.playerB = null;
                 } catch (e) {
                     console.log("Player B closing: " + e);

@@ -1,10 +1,10 @@
-var socket;
+gameState = "";
 
-function initSocket() {
+var socketModule = (function initSocket() {
 
     socket = new WebSocket("ws://localhost:3000");
     socket.onmessage = function (event) {
-        document.getElementById("hello").innerHTML = event.data;
+        gameState = event.data;
     };
 
     socket.onopen = function () {
@@ -18,4 +18,4 @@ function initSocket() {
         socket.send(JSON.stringify(msg));
         document.getElementById("hello").innerHTML = "Sending a first message to the server ...";
     };
-}
+})();

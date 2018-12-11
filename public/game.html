@@ -24,17 +24,18 @@
     </div>
     <div id="game">
         <div id="friendly-field">
-                <script>
-                        function onmouseenterTableCell(e){
-                             e.target.style.backgroundColor = "#00F";
-                        }
-                        function onmouseoutTableCell(e) {
-                            e.target.style.backgroundColor = "#FFF";
-                         }
+            <script>
+                function onmouseenterTableCell(e) {
+                    e.target.style.backgroundColor = "#00F";
+                }
+
+                function onmouseoutTableCell(e) {
+                    e.target.style.backgroundColor = "#FFF";
+                }
             </script>
             <div id="friendly-fleet" style="border:1px solid">
             </div>
-            
+
             <div id="coor">
             </div>
         </div>
@@ -56,8 +57,10 @@
             <span id="value opponents-name"></span>
         </div>
         <div>
-                <button id="ready-button" style="visibility: hidden" onclick="gameBoard.onclickPlayerReadyButton()">I'm ready</button>
-            </div>
+            <button id="ready-button" style="visibility: hidden" onclick="gameBoard.onclickPlayerReadyButton()">I'm
+                ready
+            </button>
+        </div>
     </div>
     <div id="enemy-field">
         <div id="enemy-fleet">
@@ -69,11 +72,12 @@
         <span id="hello">Test</span>
     </div>
 </div>
-    <script src="javascripts/Direction.js" type="text/javascript"></script>
-    <script src="javascripts/Coordinate.js" type="text/javascript"></script>
-    <script src="javascripts/Ship.js" type="text/javascript"></script>
-    <script src="javascripts/GameState.js" type="text/javascript"></script>
-    <script src="javascripts/GameBoard.js" type="text/javascript"></script>
-    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="javascripts/Message.js" type="text/javascript"></script>
+<script src="javascripts/Direction.js" type="text/javascript"></script>
+<script src="javascripts/Coordinate.js" type="text/javascript"></script>
+<script src="javascripts/Ship.js" type="text/javascript"></script>
+<script src="javascripts/GameBoard.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+<script src="javascripts/Client.js" type="text/javascript"></script>
 </body>
 </html>

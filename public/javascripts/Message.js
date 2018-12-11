@@ -19,6 +19,9 @@
     exports.O_YOUR_TURN = {type: "Your turn"};
     exports.O_OTHER_TURN = {type: "Opponent turn"};
 
-    exports.O_IM_READY = {type: "IM_READY", coordinatesFleet: {}, directions: {}, lengths: {}};
+    exports.O_IM_READY = {type: "IM_READY", coordinatesFleet: {}};
+    exports.O_FIRE = {type: "FIRE", coordinate: {x: null, y: null}};
+    exports.O_YOU_HAVE_HIT = {type: "HAVE_HIT", coordinate: {x: null, y: null}};
+    exports.O_YOU_ARE_HIT = {type: "ARE_HIT", coordinate: {x: null, y: null}};
 
 })(typeof exports === "undefined" ? this.Message = {} : exports);

@@ -21,10 +21,10 @@ var coordinateModule = (function (x, y) {
         },
         addDirection: function (direction) {
             switch (direction) {
-                case Direction.East:
+                case directionModule().East:
                     xCoordinate++;
                     break;
-                case Direction.South:
+                case directionModule().South:
                     yCoordinate++;
                     break;
             }

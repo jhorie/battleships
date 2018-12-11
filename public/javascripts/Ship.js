@@ -9,14 +9,13 @@ shipModule = (function (length, coordinate, id, startLeft) {
     const leftStart = startLeft;
     const topStart = 70;
 
-    if (document !== 'undefined') {
-        let divElement = document.createElement("div");
-        divElement.className = "ship-" + length;
-        divElement.id = "ship-" + id;
-        divElement.style.top = topStart + "%";
-        divElement.style.left = startLeft + "%";
-        divElement.style.transformOrigin = "20px 20px";
-    }
+    let divElement = document.createElement("div");
+    divElement.className = "ship-" + length;
+    divElement.id = "ship-" + id;
+    divElement.style.top = topStart + "%";
+    divElement.style.left = startLeft + "%";
+    divElement.style.transformOrigin = "20px 20px";
+
 
     function allShipCoordinatesAreInField(newCoordinate) {
         let movingCoordinate = new coordinateModule(newCoordinate.getX(), newCoordinate.getY());
@@ -47,10 +46,10 @@ shipModule = (function (length, coordinate, id, startLeft) {
         coordinatesThisShip = getCoordinatesFleet();
 
         switch (directionShip) {
-            case Direction.East:
+            case directionModule().East:
                 divElement.style.transform = "rotate(270deg)";
                 break;
-            case Direction.South:
+            case directionModule().South:
                 divElement.style.transform = "rotate(0deg)";
                 break;
         }
@@ -75,6 +74,15 @@ shipModule = (function (length, coordinate, id, startLeft) {
             coordinates.push(new coordinateModule(movingCoordinate.getX(), movingCoordinate.getY()));
         }
         return coordinates;
+    }
+
+    function getCoordinatesFleetInXAndY() {
+        let coordinates = getCoordinatesFleet();
+        var coordinatesInArray = [];
+        coordinates.forEach(function (coordinate) {
+            coordinatesInArray.push({x: coordinate.getX(), y: coordinate.getY()});
+        });
+        return coordinatesInArray;
     }
 
     function rotate() {
@@ -111,6 +119,7 @@ shipModule = (function (length, coordinate, id, startLeft) {
             return divElement;
         },
         getCoordinatesFleet: getCoordinatesFleet,
+        getCoordinatesFleetInXAndY: getCoordinatesFleetInXAndY,
         getId: function () {
             return idShip;
         },

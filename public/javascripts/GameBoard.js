@@ -132,11 +132,9 @@ var gameBoard = (function (exports) {
     function onclickPlayerReadyButton() {
         let msg = Message.O_IM_READY;
         for (let i = 0; i < ships.length; i++) {
-            console.log(ships[i].getCoordinateShip());
-            msg.coordinatesFleet[i] = {x: ships[i].getCoordinateShip().getX(), y: ships[i].getCoordinateShip().getY()};
-            msg.directions[i] = ships[i].getDirection();
-            msg.lengths[i] = ships[i].getLengthShip();
+            msg.coordinatesFleet[i] = ships[i].getCoordinatesFleetInXAndY();
         }
+        console.log("dit sturen we: " + JSON.stringify(msg));
         socket.send(JSON.stringify(msg));
     }
 
@@ -187,5 +185,3 @@ var gameBoard = (function (exports) {
     };
 })();
 
-
-module.exports = gameBoard;

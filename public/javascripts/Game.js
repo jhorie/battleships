@@ -1,9 +1,22 @@
 require("./Message");
 
 var game = function (gameId) {
-    this.playerA = null;
-    this.playerB = null
+    this.playerA = {ws: null, ships: null, field: this.createField()};
+    this.playerB = {ws: null, ships: null, field: this.createField()};
     this.gameState = "0 JOINT";
+};
+
+game.prototype.createField = function () {
+    let field = [];
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            if (j === 0) {
+                field[i] = [];
+            }
+            field[i][j] = 1;
+        }
+    }
+    return field;
 };
 
 game.prototype.transitionStates = {};
@@ -80,14 +93,67 @@ game.prototype.addPlayer = function (p) {
     }
 
 
-    if (this.playerA === null) {
-        this.playerA = p;
+    if (this.playerA.ws === null) {
+        this.playerA.ws = p;
         this.setStatus("1 JOINT");
         return this.gameState;
     } else {
-        this.playerB = p;
+        this.playerB.ws = p;
         this.setStatus("2 JOINT");
         return this.gameState;
+    }
+};
+
+game.prototype.setShips = function (coordinates, wsId) {
+    if (this.gameState !== "2 JOINT" && this.gameState !== "PLAYER A READY" && this.gameState !== "PLAYER B READY") {
+        return new Error("ERROR");
+    }
+
+    if (this.gameState === "2 JOINT") {
+        if (wsId === this.playerA.ws.id) {
+            this.playerA.ships = coordinates;
+            this.setStatus("PLAYER A READY");
+        } else if (wsId === this.playerB.ws.id) {
+            this.playerB.ships = coordinates;
+            this.setStatus("PLAYER B READY");
+        }
+        return this.gameState;
+    }
+};
+
+game.prototype.fire = function (coordinate, wsId) {
+    if (this.gameState !== "TURN A" || this.gameState !== "TURN B") {
+        return new Error("ERROR");
+    }
+
+    if (this.gameState === "TURN A" && this.playerA.ws.id === wsId) {
+        if (fieldCheck(this.playerB.field, coordinate)) {
+            if (fireCheck(this.playerB.ships)) {
+
+            }
+        }
+    } else if (this.gameState === "TURN B" && this.playerB.ws.id === wsId) {
+
+    }
+
+    function fieldCheck(field, fireCoordinate) {
+        if (field[fireCoordinate.x][fireCoordinate.y] === 1) {
+            field[fireCoordinate.x][fireCoordinate.y] = 0;
+            console.log("fieldCheck HIT");
+            return true;
+        }
+    }
+
+    function fireCheck(ships, fireCoordinate) {
+        for (let j = 0; j < ships.length; j++) {
+            for (let i = 0; i < ships[j].length; i++) {
+                if (ships[j][i].x === fireCoordinate.x && ships[j][i].y === fireCoordinate.y) {
+                    ships[j].splice(i, 1);
+                    console.log("fireCheck HIT");
+                    return true;
+                }
+            }
+        }
     }
 };
 
