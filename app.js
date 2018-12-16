@@ -8,6 +8,11 @@ var Message = require("./public/javascripts/Message");
 var port = process.argv[2];
 var app = express();
 
+app.set("view engine", "ejs");
+app.get("/", (req, res) => {
+    res.render("splash.ejs", { gamesInitialized: gameStatus.gamesInitialized, gamesCompleted: gameStatus.gamesCompleted });
+});
+
 app.use(express.static(__dirname + "/public"));
 
 var server = http.createServer(app);

@@ -1,7 +1,5 @@
 gameState = "";
 
-var Message = require('./Message');
-
 var socketModule = (function initSocket() {
 
     socket = new WebSocket("ws://localhost:3000");
@@ -15,12 +13,47 @@ var socketModule = (function initSocket() {
         }
 
         if (gameState == "HAVE_MISSED") {
-            let cells = document.getElementById("enemy-fleet").getElementsByTagName("xdata");
-            console.log(msg.coordinate);
-            for (let i = 0; i < cells.length; i++) {
-                if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
-                    console.log("MISS");
-                    cells[i].innerHTML = "MISS";
+                for(let j = 0; j < 10; j++){
+                    var Row = document.getElementById("enemyTableCell Row " + j);
+                    let cells = Row.getElementsByTagName("td");
+                    for (let i = 0; i < 10; i++) {
+                        if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
+                            cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"39px\" height=\"39px\">";
+                        }
+                    }
+                }
+        }
+        
+        if( gameState == "HAVE_HIT") {
+            for(let j = 0; j < 10; j++){
+                var Row = document.getElementById("enemyTableCell Row " + j);
+                let cells = Row.getElementsByTagName("td");
+                for (let i = 0; i < 10; i++) {
+                    if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
+                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"39px\" height=\"39px\">";
+                    }
+                }
+            }
+        }
+        if( gameState == "ARE_MISSED") {
+            for(let j = 0; j < 10; j++){
+                var Row = document.getElementById("friendlyTableCell Row " + j);
+                let cells = Row.getElementsByTagName("td");
+                for (let i = 0; i < 10; i++) {
+                    if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
+                        cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"39px\" height=\"39px\">";
+                    }
+                }
+            }          
+        }
+        if( gameState == "ARE_HIT") {
+            for(let j = 0; j < 10; j++){
+                var Row = document.getElementById("friendlyTableCell Row " + j);
+                let cells = Row.getElementsByTagName("td");
+                for (let i = 0; i < 10; i++) {
+                    if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
+                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"39px\" height=\"39px\">";
+                    }
                 }
             }
         }

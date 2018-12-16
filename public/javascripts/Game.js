@@ -107,7 +107,6 @@ game.prototype.addPlayer = function (p) {
 
 game.prototype.setShips = function (coordinates, wsId) {
     console.table(coordinates);
-    console.log(coordinates);
     if (this.gameState !== "2 JOINT" && this.gameState !== "PLAYER A READY" && this.gameState !== "PLAYER B READY") {
         return new Error("ERROR");
     }
@@ -151,7 +150,7 @@ game.prototype.fire = function (coordinate, wsId) {
                 msg.coordinate = coordinate;
                 this.playerA.ws.send(JSON.stringify(msg));
 
-                msg = Message.O_FIRE;
+                msg = Message.O_ARE_HIT;
                 msg.coordinate = coordinate;
                 this.playerB.ws.send(JSON.stringify(msg));
             } else {
@@ -159,13 +158,22 @@ game.prototype.fire = function (coordinate, wsId) {
                 msg.coordinate = coordinate;
                 this.playerA.ws.send(JSON.stringify(msg));
 
-                msg = Message.O_FIRE;
+                msg = Message.O_ARE_MISSED;
                 msg.coordinate = coordinate;
                 this.playerB.ws.send(JSON.stringify(msg));
             }
 
-            this.setStatus("TURN B");
-            return this.gameState;
+            if(winCheck(this.playerB.ships)){
+                let msg = Message.O_YOU_WON;
+                console.log("player A won!");
+                this.playerA.ws.send(JSON.stringify(msg));
+
+                msg = Message.O_YOU_LOST;
+                this.playerB.ws.send(JSON.stringify(msg));
+            } else{
+                this.setStatus("TURN B");
+                return this.gameState;
+            }
         } else {
             //// invalid coordinate
             let msg = Message.O_INVALID_COORDINATE;
@@ -181,21 +189,29 @@ game.prototype.fire = function (coordinate, wsId) {
                 msg.coordinate = coordinate;
                 this.playerB.ws.send(JSON.stringify(msg));
 
-                msg = Message.O_FIRE;
+                msg = Message.O_ARE_HIT;
                 msg.coordinate = coordinate;
-                this.playerA.ws.send(JSON.stringify(msg));
+                this.playerA.ws.send(JSON.stringify(msg));          
             } else {
                 let msg = Message.O_HAVE_MISSED;
                 msg.coordinate = coordinate;
                 this.playerB.ws.send(JSON.stringify(msg));
 
-                msg = Message.O_FIRE;
+                msg = Message.O_ARE_MISSED;
                 msg.coordinate = coordinate;
                 this.playerA.ws.send(JSON.stringify(msg));
             }
+            if(winCheck(this.playerA.ships)){
+                let msg = Message.O_YOU_WON;
+                this.playerB.ws.send(JSON.stringify(msg));
+                console.log("player B won!");
 
-            this.setStatus("TURN A");
-            return this.gameState;
+                msg = Message.O_YOU_LOST;
+                this.playerA.ws.send(JSON.stringify(msg));
+            } else{
+                this.setStatus("TURN A");
+                return this.gameState;
+            }
         } else {
             //// invalid coordinate
             let msg = Message.O_INVALID_COORDINATE;
@@ -222,11 +238,26 @@ game.prototype.fire = function (coordinate, wsId) {
                 if (ships[j][i].x == fireCoordinate.x && ships[j][i].y == fireCoordinate.y) {
                     ships[j].splice(i, 1);
                     console.log("fireCheck HIT");
+                    console.log(ships);
                     return true;
                 }
             }
         }
         console.log("fireCheck MISS");
+        console.log(ships);
+        return false;
+    }
+
+    function winCheck(ships){
+        let boats = 0;
+        for(let i=0; i< ships.length; i++){
+            if (ships[i].length!==0){
+                boats += 1;
+            }
+        }
+        if(boats === 0){
+            return true;
+        }
         return false;
     }
 };

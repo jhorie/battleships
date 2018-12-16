@@ -8,6 +8,16 @@
 <body>
     <header id="title">
         <h1>BASIC BATTLESHIPS</h1>
+        <h3><%= gamesInitialized %> 
+            <%if (gamesInitialized != 1) { %>
+                games
+            <% } else { %>
+                game
+            <% } %>
+            initialized, 
+            <%= gamesCompleted %> 
+            completed
+        </h3>
     </header>
     <main>
         <img src="images/warshipsplash.png" id="image" alt="warshipsplash.png" width="50%" height="60%">

@@ -1,0 +1,116 @@
+html{
+    height: 95%;
+    width: 100%
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+#main {
+    width: 100%;
+    height: 100%;  
+}
+
+#title {
+    color: rgb(68, 65, 65);
+    position: absolute;
+    top: 1%;
+    left: 40%;
+}
+
+#boat {
+    position: absolute;
+    bottom: 1%;
+    right: 0%;
+    animation: move 15s;
+}
+
+#image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#name {
+    position: absolute;
+    top: 81%;
+    left:28%;
+}
+
+label::before{
+    content: "Name:";
+    position: absolute;
+    top: 81.5%;
+    left:25%;
+    font-weight: bold;
+    color: darkgray;
+}
+
+#name:active{
+    position: absolute;
+    background-color: darkgray;
+    top: 81%;
+    left:28%;
+}
+
+#random {
+    position: absolute;
+    top: 81%;
+    left:48%;
+    background-color: white;
+    color: black;
+    padding: 18px 24px;
+    border: 2px solid #4CAF50; /* Green */
+    border-radius: 10px;
+    font: 14px "Lucida Console";
+    font-weight: bold;
+}
+
+#random:hover {
+    position: absolute;
+    top: 81%;
+    left:48%;
+    background-color: white;
+    color: black;
+    padding: 18px 24px;
+    border: 2px solid rgb(9, 64, 228); /* Blue */
+    border-radius: 10px;
+    font: 14px "Lucida Console";
+    font-weight: bold;
+    transition:  border 2s;
+}
+
+#friend {
+    position: absolute;
+    top: 81%;
+    left:50%;
+}
+
+#statistics{
+    position: absolute;
+    top: 81%;
+    left: 68%;
+    background-color: white;
+    color: black;
+    padding: 18px 24px;
+    border: 2px solid #4CAF50; /* Green */
+    border-radius: 10px;
+    font: 14px "Lucida Console";
+    font-weight: bold;
+}
+
+@keyframes move{
+   from{
+       transform: translate(-1000%, 0%)
+   } 
+   to {
+       transform: translate(0%, 0%)
+   }
+}

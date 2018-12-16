@@ -1,7 +1,7 @@
 var gameBoard = (function (exports) {
 
     let ship1 = new shipModule(2, null, 1, 4);
-    // let ship2 = new shipModule(3, null, 2, 8);
+    //  let ship2 = new shipModule(3, null, 2, 8);
     // let ship3 = new shipModule(3, null, 3, 12);
     // let ship4 = new shipModule(4, null, 4, 16);
     // let ship5 = new shipModule(5, null, 5, 20);
@@ -24,7 +24,7 @@ var gameBoard = (function (exports) {
     function createTable(idTableCell) {
         var Table = "<table>";
         for (let y = 0; y < 10; y++) {
-            Table = Table + "<tr class='fleetRow'>";
+            Table = Table + "<tr id='"+ idTableCell +" Row "+ y+"' class='fleetRow'>";
             for (let x = 0; x < 10; x++) {
                 Table = Table + "<td class='fleetCell' id='" + idTableCell + "' xdata='" + x + "' ydata='" + y + "' onclick='enemyTableCellClicked(event)' onmouseover='onmouseenterTableCell(event)' onmouseout='onmouseoutTableCell(event)'> <div xdata='" + x + "' ydata='" + y + "' onclick='printcoor(event)'>" + "</div></td>";
             }
@@ -99,7 +99,7 @@ var gameBoard = (function (exports) {
                             }
                         }
                     }
-                console.log("Lets check if coordinates are valid");
+                /*\("Lets check if coordinates are valid");*/
                 if (coordinateShip != null && !allShipCoordinatesAreInField(ships[i], coordinateShip)) {
                     coordinateShip = null;
                     ships[i].setDirection(directionModule().South);
@@ -141,6 +141,8 @@ var gameBoard = (function (exports) {
         }
         console.log("dit sturen we: " + JSON.stringify(msg));
         socket.send(JSON.stringify(msg));
+        let buttonchange = document.getElementById("ready-button");
+        buttonchange.style.visibility = "hidden";
     }
 
     function allShipCoordinatesAreInField(ship, newCoordinate) {
