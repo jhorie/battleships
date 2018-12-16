@@ -35,18 +35,6 @@
         </div>
     </div>
     <div id="game-stats">
-        <div id="div time-in-war">
-            <span id="key time-in-war">Time in war</span>
-            <span id="value time-in-war"></span>
-        </div>
-        <div id="shots-fired">
-            <span id="key shots-fired">Shots fired</span>
-            <span id="value shots-fired"></span>
-        </div>
-        <div id="opponent-name">
-            <span id="key opponents-name">Opponent</span>
-            <span id="value opponents-name"></span>
-        </div>
         <div>
             <button id="ready-button" style="visibility: hidden" onclick="gameBoard.onclickPlayerReadyButton()">I'm
                 ready
@@ -54,6 +42,7 @@
             <form action="game.html" method="get" id="buttons">
                  <input type="submit" id="play-again" style="visibility: hidden" value="Play again">
             </form>
+            <button id="fullscreen" onclick="openFullscreen();">Open Game in Fullscreen Mode</button>
         
         </div>
     </div>
@@ -83,6 +72,19 @@
     function enemyTableCellClicked(e) {
         if (gameState === "Your turn") {
             socketModule.firedCoordinate(e.target.getAttribute('xdata'), e.target.getAttribute('ydata'));
+        }
+    }
+
+    function openFullscreen() {
+        let elem = document.getElementById("body");
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { /* Firefox */
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { /* IE/Edge */
+            elem.msRequestFullscreen();
         }
     }
 

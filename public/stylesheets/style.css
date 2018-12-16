@@ -122,7 +122,16 @@ td {
     position: absolute;
 }
 
-/*.fleetCell {*/
-/*width: 2%;*/
-/*height: 2%;*/
-/*}*/
+#body:fullscreen{
+    background-color: white;
+}
+
+#body:fullscreen {
+    background-color: rgba(255,255,255,0);
+}
+#body:-webkit-full-screen {
+    background-color: rgba(255,255,255,0);
+}
+#body:-moz-full-screen {
+    background-color: rgba(255,255,255,0);
+}
