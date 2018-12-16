@@ -56,6 +56,7 @@
     }
 
     #title-friendly-fleet {
+        animation: coloring 15s infinite;
         position: absolute;
         top: 5%;
         left: 3%;
@@ -127,18 +128,6 @@
 
 }
 
-@media (max-width: 1365px), (max-height: 767px){
-    #main {
-        visibility: hidden;
-
-    }
-
-    body::before {
-
-        content: "Screen resolution too low to play.";
-    }
-}
-
 #body:fullscreen{
     background-color: white;
 }
@@ -155,4 +144,27 @@
 
 :not(:root):-webkit-full-screen::backdrop {
     background: white;
+}
+
+@media (max-width: 1365px), (max-height: 767px){
+    #main {
+        visibility: hidden;
+
+    }
+
+    body::before {
+
+        content: "Screen resolution too low to play.";
+    }
+}
+
+@keyframes coloring{
+    from{
+        color: rgb(30, 26, 26);
+        background-color: white;
+    }
+    to{
+        color: white;
+        background-color: black;
+    }
 }
