@@ -57,6 +57,10 @@ var socketModule = (function initSocket() {
                 }
             }
         }
+
+        if (gameState == "ABORTED") {
+            alert("Other player left the game.");
+        }
         if(gameState == "You won" || gameState == "You lost" || gameState == "ABORTED"){
             let play = document.getElementById("play-again");
                 play.style.visibility = "visible";

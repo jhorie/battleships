@@ -24,6 +24,7 @@
     exports.O_HAVE_MISSED = {type: "HAVE_MISSED", coordinate: {x: null, y: null}};
     exports.O_ARE_HIT = {type: "ARE_HIT", coordinate: {x: null, y: null}};
     exports.O_ARE_MISSED = {type: "ARE_MISSED", coordinate: {x: null, y: null}};
+    exports.O_ABORTED = {type: "ABORTED"};
     exports.O_YOU_WON = {type: "You won"};
     exports.O_YOU_LOST = {type: "You lost"};
 

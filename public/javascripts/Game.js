@@ -4,6 +4,7 @@ var game = function (gameId) {
     this.playerA = {ws: null, ships: [], field: this.createField()};
     this.playerB = {ws: null, ships: [], field: this.createField()};
     this.gameState = "0 JOINT";
+    this.gameId = gameId;
 };
 
 game.prototype.createField = function () {
@@ -33,7 +34,7 @@ game.prototype.transitionStates["ABORTED"] = 9;
 
 game.prototype.transitionMatrix = [
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0], // 0 JOINT
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0], // 1 JOINT
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 1], // 1 JOINT
     [0, 0, 0, 1, 1, 1, 0, 0, 0, 1], // 2 JOINT
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], // WAITING FOR A
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], // WAITING FOR B
@@ -170,6 +171,7 @@ game.prototype.fire = function (coordinate, wsId) {
 
                 msg = Message.O_YOU_LOST;
                 this.playerB.ws.send(JSON.stringify(msg));
+                this.setStatus("WON A");
             } else{
                 this.setStatus("TURN B");
                 return this.gameState;
@@ -208,6 +210,7 @@ game.prototype.fire = function (coordinate, wsId) {
 
                 msg = Message.O_YOU_LOST;
                 this.playerA.ws.send(JSON.stringify(msg));
+                this.setStatus("WON B");
             } else{
                 this.setStatus("TURN A");
                 return this.gameState;
