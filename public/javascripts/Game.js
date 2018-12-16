@@ -171,6 +171,7 @@ game.prototype.fire = function (coordinate, wsId) {
 
                 msg = Message.O_YOU_LOST;
                 this.playerB.ws.send(JSON.stringify(msg));
+                this.setStatus("WON A");
             } else{
                 this.setStatus("TURN B");
                 return this.gameState;
@@ -209,6 +210,7 @@ game.prototype.fire = function (coordinate, wsId) {
 
                 msg = Message.O_YOU_LOST;
                 this.playerA.ws.send(JSON.stringify(msg));
+                this.setStatus("WON B");
             } else{
                 this.setStatus("TURN A");
                 return this.gameState;
