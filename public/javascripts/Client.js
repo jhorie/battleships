@@ -6,7 +6,10 @@ var socketModule = (function initSocket() {
     socket.onmessage = function (event) {
         gameState = JSON.parse(event.data).type;
         let msg = JSON.parse(event.data);
-        document.getElementById("hello").innerHTML = JSON.parse(event.data).type;
+
+        if (typeof msg.message != "undefined") {
+            document.getElementById("game-status").innerHTML = msg.message;
+        }
 
         if (gameState == "INVALID_COORDINATE") {
             alert("INVALID COORDINATE, pick new one");
@@ -76,7 +79,7 @@ var socketModule = (function initSocket() {
 
         msg.data = myParam;
         socket.send(JSON.stringify(msg));
-        document.getElementById("hello").innerHTML = "Sending a first message to the server ...";
+
     };
     return {
         firedCoordinate: function (x, y) {

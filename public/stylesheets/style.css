@@ -99,8 +99,9 @@
     #game-stats {
         font-size: 15px;
         position: absolute;
-        top: 30%;
+        top: 50%;
         left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     table {
@@ -150,4 +151,8 @@
 }
 #body:-moz-full-screen {
     background-color: rgba(255,255,255,0);
+}
+
+:not(:root):-webkit-full-screen::backdrop {
+    background: white;
 }
