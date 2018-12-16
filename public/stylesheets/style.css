@@ -1,125 +1,141 @@
-html{
-    height: 100%;
-    width: 100%
+@media (min-width: 1366px) and (min-height: 768px) {
+
+    html {
+        height: 100%;
+        width: 100%
+    }
+
+    body {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    }
+
+    a {
+        color: #00B7FF;
+    }
+
+    #main {
+        width: 100%;
+        height: 100%;
+    }
+
+    .ship-2 {
+        position: absolute;
+        width: 40px;
+        height: 80px;
+    }
+
+    .ship-3 {
+        position: absolute;
+        width: 40px;
+        height: 120px;
+    }
+
+    .ship-4 {
+        position: absolute;
+        width: 40px;
+        height: 160px;
+    }
+
+    .ship-5 {
+        position: absolute;
+        width: 40px;
+        height: 200px;
+    }
+
+    .img-ship {
+        object-fit: fill;
+        width: 100%;
+        height: 100%;
+    }
+
+    .title-text {
+        font-size: 30px;
+    }
+
+    #title-friendly-fleet {
+        position: absolute;
+        top: 5%;
+        left: 3%;
+        color: grey;
+    }
+
+    #friendly-fleet {
+        position: absolute;
+        top: 10%;
+        left: 3%;
+        border: 1px solid black;
+    }
+
+    #coor {
+        position: absolute;
+        top: 1px;
+        left: 1px;
+    }
+
+    #title-enemy-fleet {
+        position: absolute;
+        top: 5%;
+        right: 3%;
+        color: grey;
+    }
+
+    #enemy-fleet {
+        position: absolute;
+        top: 10%;
+        right: 3%;
+        border: 1px solid black;
+    }
+
+    #title-vs {
+        font-size: 20%;
+        position: absolute;
+        top: 7%;
+        left: 50%;
+    }
+
+    #game-stats {
+        font-size: 15px;
+        position: absolute;
+        top: 30%;
+        left: 50%;
+    }
+
+    table {
+        width: 400px;
+        height: 400px;
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        width: 10%;
+        height: 10%;
+        /*height: 100%;*/
+    }
+
+    #rotate-1 {
+        left: 0%;
+        top: 0%;
+        position: absolute;
+    }
+
 }
 
-body {
-    height: 100%;
-    width: 100%;
-    margin: 0px;
-    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+@media (max-width: 1365px), (max-height: 767px){
+    #main {
+        visibility: hidden;
 
-a {
-    color: #00B7FF;
-}
+    }
 
-#main {
-    width: 100%;
-    height: 100%;  
-}
+    body::before {
 
-.ship-2 {
-    position: absolute;
-    width: 40px;
-    height: 80px;
-}
-
-.ship-3 {
-    position: absolute;
-    width: 40px;
-    height: 120px;
-}
-
-.ship-4 {
-    position: absolute;
-    width: 40px;
-    height: 160px;
-}
-
-.ship-5 {
-    position: absolute;
-    width: 40px;
-    height: 200px;
-}
-
-.img-ship {
-    object-fit: fill;
-    width: 100%;
-    height: 100%;
-}
-
-.title-text {
-    font-size: 30px;
-}
-
-#title-friendly-fleet {
-    position: absolute;
-    top: 5%;
-    left: 3%;
-    color: grey;
-}
-
-#friendly-fleet {
-    position: absolute;
-    top: 10%;
-    left: 3%;
-    border: 1px solid black;
-}
-
-#coor {
-    position: absolute;
-    top: 1px;
-    left: 1px;
-}
-
-#title-enemy-fleet {
-    position: absolute;
-    top: 5%;
-    right: 3%;
-    color: grey;
-}
-
-#enemy-fleet {
-    position: absolute;
-    top: 10%;
-    right: 3%;
-    border: 1px solid black;
-}
-
-#title-vs {
-    font-size: 20%;  
-    position: absolute;
-    top: 7%;
-    left: 50%;
-}
-
-#game-stats {
-    font-size: 15px;
-    position: absolute;
-    top: 30%;
-    left: 50%;
-}
-
-table {
-    width: 400px;
-    height: 400px;
-    border: 1px solid black;
-    border-collapse: collapse;
-}
-
-td {
-    border: 1px solid black;
-    border-collapse: collapse;
-    width: 10%;
-    height: 10%;
-    /*height: 100%;*/
-}
-
-#rotate-1 {
-    left: 0%;
-    top: 0%;
-    position: absolute;
+        content: "Screen resolution too low to play.";
+    }
 }
 
 /*.fleetCell {*/
