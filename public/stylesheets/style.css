@@ -127,7 +127,7 @@
 
 }
 
-@media (max-width: 1365px), (max-height: 767px){
+@media (max-width: 1365px), (max-height: 767px) {
     #main {
         visibility: hidden;
 
@@ -139,20 +139,31 @@
     }
 }
 
-#body:fullscreen{
+#body:fullscreen {
     background-color: white;
 }
 
 #body:fullscreen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
+
 #body:-webkit-full-screen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
+
 #body:-moz-full-screen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 :not(:root):-webkit-full-screen::backdrop {
     background: white;
+}
+
+.game-status {
+    padding: 20px;
+}
+
+.game-status:hover {
+    background-color: darkblue;
+    color: white;
 }

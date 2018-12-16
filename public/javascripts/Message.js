@@ -10,7 +10,6 @@
 // };
 
 
-
 (function (exports) {
     exports.O_WAIT_FOR_NEW_PLAYER = {type: "WAIT_FOR_NEW_PLAYER", message: "Waiting for other player to join..."};
     exports.O_WAIT_FOR_PLAYER = {type: "WAIT_FOR_PLAYER", message: "Waiting for both players to place ships..."};
