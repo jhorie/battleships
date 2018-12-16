@@ -129,22 +129,39 @@
 }
 
 #body:fullscreen{
+
+@media (max-width: 1365px), (max-height: 767px) {
+    #main {
+        visibility: hidden;
+
+    }
+
+    body::before {
+
+        content: "Screen resolution too low to play.";
+    }
+}
+
+#body:fullscreen {
     background-color: white;
 }
 
 #body:fullscreen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
+
 #body:-webkit-full-screen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
+
 #body:-moz-full-screen {
-    background-color: rgba(255,255,255,0);
+    background-color: rgba(255, 255, 255, 0);
 }
 
 :not(:root):-webkit-full-screen::backdrop {
     background: white;
 }
+
 
 @media (max-width: 1365px), (max-height: 767px){
     #main {
@@ -167,4 +184,12 @@
         color: white;
         background-color: black;
     }
+
+.game-status {
+    padding: 20px;
+}
+
+.game-status:hover {
+    background-color: darkblue;
+    color: white;
 }

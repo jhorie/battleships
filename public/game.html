@@ -35,13 +35,16 @@
         </div>
     </div>
     <div id="game-stats">
-        <h3>Game Status: </h3><h3 id="game-status"></h3>
+        <div class="game-status">
+            <h3>Game Status: </h3>
+            <h3 id="game-status"></h3>
+        </div>
         <div>
             <button id="ready-button" style="visibility: hidden" onclick="gameBoard.onclickPlayerReadyButton()">I'm
                 ready
             </button>
             <form action="game.html" method="get" id="buttons">
-                 <input type="submit" id="play-again" style="visibility: hidden" value="Play again">
+                <input type="submit" id="play-again" style="visibility: hidden" value="Play again">
             </form>
             <button id="fullscreen" onclick="openFullscreen();">Open Game in Fullscreen Mode</button>
 

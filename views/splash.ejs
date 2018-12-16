@@ -6,34 +6,32 @@
     <title>Basic Battleships</title>
 </head>
 <body>
-    <header id="title">
-        <h1>BASIC BATTLESHIPS</h1>
-        <h3><%= gamesInitialized %> 
-            <%if (gamesInitialized != 1) { %>
-                games
-            <% } else { %>
-                game
-            <% } %>
-            initialized, 
-            <%= gamesCompleted %> 
-            completed,
-            <%= gameAccessed %>
-            times game accessed
-        </h3>
-    </header>
-    <main>
-        <img src="images/warshipsplash.png" id="image" alt="warshipsplash.png" width="50%" height="60%">
+<header id="title">
+    <h1>BASIC BATTLESHIPS</h1>
+    <h3><%= gamesInitialized %>
+        <% if (gamesInitialized != 1) { %>
+            games
+        <% } else { %>
+            game
+        <% } %>
+        initialized,
+        <%= gamesCompleted %>
+        completed,
+        <%= gameAccessed %>
+        times game accessed
+    </h3>
+</header>
+<main>
+    <img src="images/warshipsplash.png" id="image" alt="warshipsplash.png" width="50%" height="60%">
 
-        <form action="game.html" method="get" id="buttons">
-            <label for="name" id="labelname"></label>
-            <input type="text" id="name" name="name" id="name" required>
-            <input type="submit" id="random" name="random" value="PLAY">
-           <!-- <input type="submit" id="friend" name="friend" value="PLAY with friend">-->
-        </form>
+    <form action="game.html" method="get" id="buttons">
+        <label for="name" id="labelname"></label>
+        <input type="text" id="name" name="name" id="name" required>
+        <input type="submit" id="random" name="random" value="PLAY">
+        <!-- <input type="submit" id="friend" name="friend" value="PLAY with friend">-->
+    </form>
 
-
-        <button type="button" id="statistics">Statistics</button>
-        <img src="images/boat.png" id="boat" width="10%" height="15%">
-    </main>
+    <img src="images/boat.png" id="boat" width="10%" height="15%">
+</main>
 </body>
 </html>
