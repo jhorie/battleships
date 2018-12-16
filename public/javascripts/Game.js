@@ -4,6 +4,7 @@ var game = function (gameId) {
     this.playerA = {ws: null, ships: [], field: this.createField()};
     this.playerB = {ws: null, ships: [], field: this.createField()};
     this.gameState = "0 JOINT";
+    this.gameId = gameId;
 };
 
 game.prototype.createField = function () {
@@ -33,7 +34,7 @@ game.prototype.transitionStates["ABORTED"] = 9;
 
 game.prototype.transitionMatrix = [
     [0, 1, 0, 0, 0, 0, 0, 0, 0, 0], // 0 JOINT
-    [1, 0, 1, 0, 0, 0, 0, 0, 0, 0], // 1 JOINT
+    [1, 0, 1, 0, 0, 0, 0, 0, 0, 1], // 1 JOINT
     [0, 0, 0, 1, 1, 1, 0, 0, 0, 1], // 2 JOINT
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], // WAITING FOR A
     [0, 0, 0, 0, 0, 1, 0, 0, 0, 1], // WAITING FOR B

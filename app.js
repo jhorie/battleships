@@ -19,18 +19,29 @@ var server = http.createServer(app);
 
 const wss = new websocket.Server({server});
 
-var game = new Game();
+var game;
 
 var connectionId = 0;
 var connections = {};
+var games = [new Game(connectionId)];
 
 
 wss.on("connection", function (ws) {
 
     ws.id = connectionId++;
-    connections[ws.id] = game;
+
 
     console.log("New player connecting...");
+    if (games[games.length - 1].gameState === "ABORTED") {
+        games[games.length - 1] = new Game(connectionId);
+    } else if (games[games.length - 1].gameState !==  "0 JOINT" && games[games.length - 1].gameState !==  "1 JOINT") {
+        console.log("New game created");
+        games.push(new Game(connectionId));
+    }
+
+    var game = games[games.length - 1];
+console.log("Current game state: " + game.gameState);
+    connections[ws.id] = game;
 
     let gameState = game.addPlayer(ws);
     console.log(gameState);
@@ -38,6 +49,7 @@ wss.on("connection", function (ws) {
         ws.send(JSON.stringify(Message.O_WAIT_FOR_NEW_PLAYER));
     } else {
         /// gameState === "2 JOIN";
+        console.log("Game state should be 2 JOINT: " + gameState);
         game.playerA.ws.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
         game.playerB.ws.send(JSON.stringify(Message.O_WAIT_FOR_PLAYER));
     }
@@ -75,12 +87,14 @@ wss.on("connection", function (ws) {
 
     ws.on("close", function (code) {
         console.log(ws.id + " disconnected");
-        if (code === "1001") {
+        //if (code === "1001") {
             let gameObj = connections[ws.id];
+
             if (gameObj.isValidTransition(gameObj.gameState, "ABORTED")) {
                 gameObj.setStatus("ABORTED");
-
+                console.log("ABORTED: " + gameObj.gameState);
                 try {
+                    gameObj.playerA.ws.send(JSON.stringify(Message.O_ABORTED));
                     gameObj.playerA.ws.close();
                     gameObj.playerA = null;
                 } catch (e) {
@@ -88,13 +102,14 @@ wss.on("connection", function (ws) {
                 }
 
                 try {
+                    gameObj.playerB.ws.send(JSON.stringify(Message.O_ABORTED));
                     gameObj.playerB.ws.close();
                     gameObj.playerB = null;
                 } catch (e) {
                     console.log("Player B closing: " + e);
                 }
             }
-        }
+        //}
     })
 });
 
