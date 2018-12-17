@@ -36,7 +36,3 @@ var coordinateModule = (function (x, y) {
     }
 });
 
-// var newCoordinate = new coordinateModule(3, 1);
-// console.log(newCoordinate.getX());
-// newCoordinate.setX(25);
-// console.log(newCoordinate.getX());

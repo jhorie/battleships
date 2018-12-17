@@ -1,15 +1,3 @@
-// const Message = {
-//     "WAIT_FOR_PLAYER": 0,
-//     "FOUND_PLAYER": 1,
-//     "YOUR_TURN": 2,
-//     "OTHER_TURN": 3,
-//     "YOU_WON": 4,
-//     "OPPONENT_WON": 5,
-//     "ABORTED": 6,
-//     "NAME": 7
-// };
-
-
 (function (exports) {
     exports.O_WAIT_FOR_NEW_PLAYER = {type: "WAIT_FOR_NEW_PLAYER", message: "Waiting for other player to join..."};
     exports.O_WAIT_FOR_PLAYER = {type: "WAIT_FOR_PLAYER", message: "Waiting for both players to place ships..."};

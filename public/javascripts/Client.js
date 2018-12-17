@@ -21,7 +21,7 @@ var socketModule = (function initSocket() {
                     let cells = Row.getElementsByTagName("td");
                     for (let i = 0; i < 10; i++) {
                         if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
-                            cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"39px\" height=\"39px\">";
+                            cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"35px\" height=\"35px\">";
                         }
                     }
                 }
@@ -33,7 +33,7 @@ var socketModule = (function initSocket() {
                 let cells = Row.getElementsByTagName("td");
                 for (let i = 0; i < 10; i++) {
                     if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
-                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"39px\" height=\"39px\">";
+                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"35px\" height=\"35px\">";
                     }
                 }
             }
@@ -44,7 +44,7 @@ var socketModule = (function initSocket() {
                 let cells = Row.getElementsByTagName("td");
                 for (let i = 0; i < 10; i++) {
                     if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
-                        cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"39px\" height=\"39px\">";
+                        cells[i].innerHTML = "<img src=\"images/splash.png\" width=\"35px\" height=\"35px\">";
                     }
                 }
             }          
@@ -55,7 +55,7 @@ var socketModule = (function initSocket() {
                 let cells = Row.getElementsByTagName("td");
                 for (let i = 0; i < 10; i++) {
                     if (cells[i].getAttribute('xdata') == msg.coordinate.x && cells[i].getAttribute('ydata') == msg.coordinate.y) {
-                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"39px\" height=\"39px\">";
+                        cells[i].innerHTML = "<img src=\"images/explosion.png\" width=\"35px\" height=\"35px\">";
                     }
                 }
             }
